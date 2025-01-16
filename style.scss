@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Calibri', sans-serif;
+}
+
+#main-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    gap: 15%;
+    box-sizing: border-box;
+    padding: 30px;
+    overflow: hidden;
+}
+
+@media (orientation: portrait) {
+    #main-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    #left-container {
+        width: 100% !important;
+    }
+
+    #right-container {
+        width: 100% !important;
+    }
+
+    .spiner-container {
+        justify-content: center !important;
+    }
+
+    .inputs-block {
+        align-items: center !important;
+    }
+
+}
+
+
+#left-container {
+    width: 50%;
+    height: 100%;
+}
+
+#right-container {
+    width: 50%;
+    height: 100%;
+}
+
+.inputs-block {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.inputs-container {
+    height: 100%;
+    display: flex;
+    gap: 2%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-normal {
+    display: flex;
+    gap: 10px;
+}
+
+.input-animated {
+    display: flex;
+}
+
+.normal {
+    border-radius: 15px;
+    height: 20px;
+    outline: none;
+    padding-left: 5%;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.spiner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .spinner-normal {
+        min-width: 150px;
+        min-height: 150px;
+        border-radius: 50%;
+        position: relative;
+        box-sizing: border-box;
+        background: #ddd;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+    }
+
+    .spinner-animated {
+        min-width: 150px;
+        min-height: 150px;
+        border-radius: 50%;
+        position: relative;
+        animation: rotate 4s linear infinite;
+
+        &::before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 15px solid #0084ff;
+            animation: prixClipFix 4s linear infinite;
+        }
+    }
+
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    @keyframes prixClipFix {
+        0% {
+            clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+        }
+
+        25% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+        }
+
+        50% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+        }
+
+        75% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+        }
+
+        100% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+        }
+    }
+}
+
+.input-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            &:checked+.slider {
+                background-color: #0084ff;
+            }
+
+            &:checked+.slider:before {
+                transform: translateX(22px);
+            }
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+
+            &:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+        }
+    }
+}
