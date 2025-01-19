@@ -14,8 +14,13 @@ inputValue.addEventListener('input', function () {
 });
 updateProgress(parseInt(inputValue.value) || 0);
 
+inputValue.addEventListener('focusout', function () {
+    this.value = '';
+    updateProgress(value);
+});
 
 const checked = document.querySelector('.animated');
+const hide = document.querySelector('.hide');
 const spinnerContainer = document.querySelector('.spiner-container');
 
 checked.addEventListener('change', (e) => {
@@ -23,18 +28,14 @@ checked.addEventListener('change', (e) => {
     const spinner = document.querySelector('.spinner-normal') || document.querySelector('.spinner-animated');
 
     if (checked.checked) {
-        // Удаляем div с классом spinner-normal
         if (spinner) spinner.remove();
 
-        // Создаем новый div с классом spinner-animated
         const animatedSpinner = document.createElement('div');
         animatedSpinner.classList.add('spinner-animated');
         spinnerContainer.appendChild(animatedSpinner);
     } else {
-        // Удаляем div с классом spinner-animated
         if (spinner) spinner.remove();
 
-        // Создаем новый div с классом spinner-normal
         const normalSpinner = document.createElement('div');
         normalSpinner.classList.add('spinner-normal');
         spinnerContainer.appendChild(normalSpinner);
@@ -42,7 +43,6 @@ checked.addEventListener('change', (e) => {
 });
 
 
-const hide = document.querySelector('.hide');
 hide.addEventListener('change', (e) => {
     e.preventDefault()
     if (hide.checked) {
